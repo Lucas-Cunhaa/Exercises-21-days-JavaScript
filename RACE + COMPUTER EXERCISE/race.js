@@ -50,7 +50,7 @@ class race{
 let race1 = new race('Corrida de Guarabira', 'A pé', 2000)
 
 for(let i = 0; i < 10; i++){
-    race1.Pilots[i] = new car(`BMWX${i+1}`, 625 - i, i+2, i + - i* 2)
+    race1.Pilots[i] = new car(`BMWX${i+1}`, 625 , 390 + i,  i+10)
 }
 
 
