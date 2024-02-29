@@ -15,15 +15,6 @@ class car {
     }
 }
 
-bmwX6 = new car("BMW X6", 625, 80.5, 2)
-bmwX1 = new car("BMW X6", 625, 80.5, 6)
-bmwX2 = new car("BMW X6", 625, 80.5, 5)
-bmwX3 = new car("BMW X6", 625, 80.5, 4)
-bmwX4 = new car("BMW X6", 625, 80.5, 7)
-bmwX5 = new car("BMW X6", 625, 80.5, 10)
-
-
-
 class race{
     Name 
     Type 
@@ -31,7 +22,7 @@ class race{
     Pilots 
     Winner 
 
-    constructor(name, type, distance  ){
+    constructor(name, type, distance ){
        
         this.Name = name
         this.Type = type
@@ -57,6 +48,7 @@ class race{
 }
 
 let race1 = new race('Corrida de Guarabira', 'A pé', 2000)
+
 for(let i = 0; i < 10; i++){
     race1.Pilots[i] = new car(`BMWX${i+1}`, 625 - i, i+2, i + - i* 2)
 }
@@ -65,5 +57,5 @@ for(let i = 0; i < 10; i++){
 
 race1.verifyWinner()
 race1.showTheWinner()
-console.log(race1)
+console.log(race1.Winner)
 
