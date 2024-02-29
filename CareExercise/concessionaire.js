@@ -33,8 +33,6 @@ for (let i = 0; i < value.length; i++) {
     }
 }
 
-console.log(model)
-console.log(years)
-console.log(value)
+console.log(model, years, value)
 
 
