@@ -15,15 +15,14 @@ class car {
     }
 }
 
-bmwX6 = new car("BMW X6", 625, 80.5, 8)
-bmwX1 = new car("BMW X6", 625, 80.5, 1)
+bmwX6 = new car("BMW X6", 625, 80.5, 2)
+bmwX1 = new car("BMW X6", 625, 80.5, 6)
 bmwX2 = new car("BMW X6", 625, 80.5, 5)
 bmwX3 = new car("BMW X6", 625, 80.5, 4)
-bmwX4 = new car("BMW X6", 625, 80.5, 3)
-bmwX5 = new car("BMW X6", 625, 80.5, 2)
+bmwX4 = new car("BMW X6", 625, 80.5, 7)
+bmwX5 = new car("BMW X6", 625, 80.5, 10)
 
-let times = [bmwX1.result(1200),bmwX2.result(1200),bmwX3.result(1200),bmwX4.result(1200),bmwX5.result(1200),bmwX6.result(1200)];
-let cars = [bmwX1,bmwX2,bmwX3,bmwX4,bmwX5,bmwX6]
+
 
 class race{
     Name 
@@ -32,27 +31,39 @@ class race{
     Pilots 
     Winner 
 
-    constructor(name, type, distance, pilots){
+    constructor(name, type, distance  ){
        
         this.Name = name
         this.Type = type
-        this.Distance = distance 
-        this.Pilots = pilots
-        this.Winner = ""
-
+        this.Distance = distance
+        this.Pilots = []
+        this.Winner =  ''
     }
 
     verifyWinner() {
+        
         let winnerIndex = 0;
         for (let i = 1; i < this.Pilots.length; i++) {
-            if (this.Pilots[i] < this.Pilots[winnerIndex]) {
+            if (this.Pilots[i].result(this.Distance) < this.Pilots[winnerIndex].result(this.Distance)) {
                 winnerIndex = i;
             }
         }
-        return cars[winnerIndex];
+       this.Winner = this.Pilots[winnerIndex]
+    }
+
+    showTheWinner(){
+        alert("The Winner is " +  this.Winner.Name)
     }
 }
 
+let race1 = new race('Corrida de Guarabira', 'A pé', 2000)
+for(let i = 0; i < 10; i++){
+    race1.Pilots[i] = new car(`BMWX${i+1}`, 625 - i, i+2, i + - i* 2)
+}
 
-let race1 = new race("f1", "circle", 1000, times )
-console.log(race1.verifyWinner())
+
+
+race1.verifyWinner()
+race1.showTheWinner()
+console.log(race1)
+
