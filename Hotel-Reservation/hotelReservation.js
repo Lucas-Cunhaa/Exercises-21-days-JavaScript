@@ -82,6 +82,8 @@ function showByIdReserv(id) {
   hotels.forEach((hotel) => {
     if (hotel.Id === id) {
       hotelName = hotel.Name;
+    } else{ 
+      alert('Invalid reserv id')
     }
   });
   reservations.forEach((reservation) => {
@@ -104,13 +106,18 @@ function showByIdHotel(id) {
       dayEntry = reservation.EntryDay;
       dayOff = reservation.LeftDay;
       idHotel = reservation.IdHotel;
+    } else {
+        alert('invalid id')
     }
   });
   hotels.forEach((hotel) => {
     if (hotel.Id === idHotel) {
       alert(
-        `In ${hotel.Name}, localizade in ${hotel.Adress}, your reservation is scheduled for ${dayEntry} until ${dayOff}`
+        `In ${hotel.Name}, localizade in ${hotel.Adress},
+         your reservation is scheduled for ${dayEntry} until ${dayOff}`
       );
+    } else {
+        alert('invalid Id');
     }
   });
 }
@@ -121,13 +128,15 @@ function showByPerson(person) {
   reservations.forEach((reservation, i) => {
     if (reservation.Person === person) {
       index.push(i);
+    } else{
+        alert('Invalid person');
     }
   });
   for (let i = 0; i < index.length; i++) {
-    console.log(reservations[index[i]]);
+   alert(reservations[index[i]]);
   }
 }
-showByPerson("Lucas");
+
 
 function showByCategory(category) {
   let index = [];
@@ -135,13 +144,16 @@ function showByCategory(category) {
   hotels.forEach((hotel, i) => {
     if (hotel.Category === category) {
       index.push(i);
+    } else{
+      alert('Invalid Category');
     }
   });
   for (let i = 0; i < index.length; i++) {
     hotelsCategoy.push(hotels[index[i]].Name);
   }
-}
-showByCategory("Hotel");
+  alert(hotelsCategoy.Name);
+} 
+
 
 function showById(id, phone) {
   hotels.forEach((hotel) => {
