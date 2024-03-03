@@ -32,23 +32,25 @@ let hotels = [];
 let reservations = [];
 
 function registerHotel() {
-  let question = false;
+  let question =  true;
+  let idFound = false;
   do {
     let id = Number(prompt("Enter the Hotel Id"));
     let name = prompt("Enter the Hotel Name");
     let category = prompt("Enter the Category");
     let adress = prompt("Enter the Adress");
-    let phone = Number("Enter the Phone");
+    let phone = Number(prompt("Enter the Phone"));
     let hotel = new Hotel(id, name, category, adress, phone);
     hotels.push(hotel);
     let makeAnother = prompt("Want to Register another Hotel? YES/NO");
-    if (makeAnother.toLowerCase() === "NO") question = false;
+    if (makeAnother.toLowerCase() === "no") question = false;
   } while (question);
 }
 registerHotel();
 
 function registerReservation() {
-  question = false;
+  let question = true;
+  let idFound = false;
   do {
     let idHotel = Number(
       prompt("Enter the ID of the hotel where the reservation will be made")
@@ -66,26 +68,34 @@ function registerReservation() {
           dayOfEntry,
           dayOfLeft
         );
+        
         reservations.push(reservation);
-      } else {
-        alert("Hotel hotel not found");
+        idFound = true;
+        let ask = prompt("Want to make another Reservation? YES/NO");
+        if (ask.toLowerCase() === "no") question = false;
       }
-      let ask = prompt("Whant to make another Reservation? YES/NO");
-      if (ask.toLocaleLowerCase === "yes") question = true;
     });
   } while (question);
-} registerReservation();
+  
+  if(!idFound) {
+    alert('Invalid ID');
+  }
+} 
+
+registerReservation();
+
 
 
 function showByIdReserv(id) {
   let hotelName;
+  let foundIdReserv = false;
   hotels.forEach((hotel) => {
     if (hotel.Id === id) {
       hotelName = hotel.Name;
-    } else{ 
-      alert('Invalid reserv id')
+      foundIdReserv = true;
     }
   });
+  if(!foundIdReserv){alert('Invalid Id')}
   reservations.forEach((reservation) => {
     if (reservation.IdHotel === id) {
       alert(
@@ -101,57 +111,64 @@ function showByIdHotel(id) {
   let dayEntry;
   let dayOff;
   let idHotel;
+  let hotelFound = false;
   reservations.forEach((reservation) => {
     if (reservation.Id === id) {
-      dayEntry = reservation.EntryDay;
-      dayOff = reservation.LeftDay;
+      entryDay = reservation.EntryDay;
+      leftDay = reservation.LeftDay;
       idHotel = reservation.IdHotel;
-    } else {
-        alert('invalid id')
+      hotelFound = true;
     }
-  });
+    });
   hotels.forEach((hotel) => {
     if (hotel.Id === idHotel) {
-      alert(
-        `In ${hotel.Name}, localizade in ${hotel.Adress},
-         your reservation is scheduled for ${dayEntry} until ${dayOff}`
-      );
-    } else {
-        alert('invalid Id');
+      alert(`In ${hotel.Name}, localizade in ${hotel.Adress},
+      your reservation is scheduled for ${entryDay} until ${leftDay}`);
     }
-  });
+});
+
+  if(!hotelFound){ alert('Invalid Hotel') }
 }
 
 
 function showByPerson(person) {
   let index = [];
+  let personFound = false; 
   reservations.forEach((reservation, i) => {
     if (reservation.Person === person) {
       index.push(i);
-    } else{
-        alert('Invalid person');
+      personFound = true; 
     }
   });
-  for (let i = 0; i < index.length; i++) {
-   alert(reservations[index[i]]);
+
+  if (!personFound) {
+    alert('Invalid person');
+  } else {
+
+    for (let i = 0; i < index.length; i++) {
+      console.log((reservations[index[i]]));
+    }
   }
 }
 
 
 function showByCategory(category) {
   let index = [];
-  let hotelsCategoy = [];
+  let hotelsCategory = [];
+  let categoryFound = false;
+
   hotels.forEach((hotel, i) => {
     if (hotel.Category === category) {
       index.push(i);
-    } else{
-      alert('Invalid Category');
+      categoryFound = true;
     }
-  });
+    if(!categoryFound){alert('Invalid Ctegory')}
+});
+  
   for (let i = 0; i < index.length; i++) {
-    hotelsCategoy.push(hotels[index[i]].Name);
+    hotelsCategory.push(hotels[index[i]].Name);
   }
-  alert(hotelsCategoy.Name);
+  alert(hotelsCategory.join(", "));
 } 
 
 
@@ -165,23 +182,23 @@ function showById(id, phone) {
 }
 showById();
 
-let search = prompt("Want to search By? Reserv Id / Hotel Id / Person / Hotel Category ")
+let search = prompt("Want to search By? Id-R / I-dH / Person / Hotel-Category ")
 
 switch(search.toLowerCase()){
-    case "reserv id":
-        let reservId = Number(Prompt('Enter the Reserv Id for search'))
+    case "id-r":
+        let reservId = Number(prompt('Enter the Reserv Id for search'))
         showByIdReserv(reservId);
         break;
-    case "hotel id":
-        let hotelId = Number(Prompt('Enter the Hotel Id for search'));
+    case "id-h":
+        let hotelId = Number(prompt('Enter the Hotel Id for search'));
         showByIdHotel(hotelId);
         break;
     case "person":
-        let person = Prompt('Enter Person for search');
+        let person = prompt('Enter Person for search');
         showByPerson(person);
         break;
-    case "hotel category":
-        let hotelCategory = Prompt('Enter Category for search');
+    case "hotel-category":
+        let hotelCategory = prompt('Enter Category for search');
         showByCategory(hotelCategory);
         break;
     default:
