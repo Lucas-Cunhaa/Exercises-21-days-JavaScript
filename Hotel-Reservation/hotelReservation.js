@@ -60,7 +60,7 @@ function registerReservation() {
         let person = prompt("Enter the person responsible for the reservation");
         let dayOfEntry = prompt("Enter the check-in day");
         let dayOfLeft = prompt("Enter the departure day");
-        let id = Math.floor(Math.random() * 100) + 1;
+        let id = Number(prompt("Enter any Id for Reserv"))
         let reservation = new Reserv(
           id,
           idHotel,
@@ -108,8 +108,8 @@ function showByIdReserv(id) {
 
 
 function showByIdHotel(id) {
-  let dayEntry;
-  let dayOff;
+  let entryDay;
+  let leftDay;
   let idHotel;
   let hotelFound = false;
   reservations.forEach((reservation) => {
@@ -162,9 +162,10 @@ function showByCategory(category) {
       index.push(i);
       categoryFound = true;
     }
-    if(!categoryFound){alert('Invalid Ctegory')}
+    
 });
-  
+ if(!categoryFound){alert('Invalid Ctegory')}
+
   for (let i = 0; i < index.length; i++) {
     hotelsCategory.push(hotels[index[i]].Name);
   }
@@ -172,7 +173,7 @@ function showByCategory(category) {
 } 
 
 
-function showById(id, phone) {
+function addNewPhone(id, phone) {
   hotels.forEach((hotel) => {
     if (hotel.Id === id) {
       hotel.Phone = phone;
@@ -180,9 +181,9 @@ function showById(id, phone) {
     }
   });
 }
-showById();
 
-let search = prompt("Want to search By? Id-R / I-dH / Person / Hotel-Category ")
+
+let search = prompt("Want to search By? Id-R / I-dH / Person / Hotel-Category / Phone")
 
 switch(search.toLowerCase()){
     case "id-r":
@@ -201,6 +202,11 @@ switch(search.toLowerCase()){
         let hotelCategory = prompt('Enter Category for search');
         showByCategory(hotelCategory);
         break;
+    case "phone":
+      let phone = Number(prompt('Enter your phone for actualize'));
+      let id = Number(prompt('Enter the hotel id'))
+      addNewPhone(id, phone)
+      break;
     default:
         alert('Invalid Option Entered');
         break;
