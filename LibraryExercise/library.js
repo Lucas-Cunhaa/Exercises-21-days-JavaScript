@@ -21,58 +21,61 @@ class Library {
         this.Name = name ;
         this.Adress = adress ;
         this.Phone = phone ; 
-        this.Colleciton = [] ;
+        this.Collection = [] ;
     }
 
     addToCollection(book) {
         this.Collection.push(book);
     }
     searchBook(bookName) {
-        this.Colleciton.forEach(book => {
+        this.Collection.forEach(book => {
             if(book.Title === bookName ){
-               this.Collection.forEach(name =>{
-                    if(name.Title === bookName){
-                        console.log(name)
-                    }
-                })
+             console.log(book)
             }
         })
     }
     bookLoan(bookName) {
-        This.Colleciton.forEach(book => {
+        let validation = false;
+        let validBook = false;
+        this.Collection.forEach(book => {
             if(book.Title === bookName ){
-               this.Colleciton.forEach(name =>{
-                    if(name.Avaible === true){
-                        name.Avaible = false
-                        console.log(name)
-                    }
-                })
+                validation = true;
+                if(book.Avaible = true){
+                    book.Avaible = false;
+                    validBook = true;
+                }
             }
         })
+        if(!validation) {console.log("The Book was not Found")}
+        if(!validBook) {console.log("The book is not avaible")}
     }
     bookDevolution(bookName) {
-        This.Colleciton.forEach(book => {
+       let validation = false;
+       
+        
+        this.Collection.forEach(book => {
             if(book.Title === bookName ){
-               this.Collection.forEach(name => {
-                    if(name.Avaible === false){
-                        name.Avaible = true
-                        console.log(name)
-                    }
-                })
+                validation = true;
+                book.Avaible = true;
+                console.log(book)
             }
         })
-    }
+        if(!validation) {console.log("The Book was not Found")}
+    } 
+    
 
 
 }
 
-
+let amazonBookshelf = new Library("Amzon" ,"Online", 83990232323)
 let book1 = new Book("Percy", "Kj", "Sunshine", 2005, true);
 let book2 = new Book("Pearl", "Kj Roll", "Sunshine", 2010, false);
 
 
-let amazonBookshelf = new Library("Amzon" ,"Online", 83990232323)
+
 
 amazonBookshelf.addToCollection(book1)
 amazonBookshelf.addToCollection(book2)
-amazonBookshelf.searchBook("Percy")
+amazonBookshelf.searchBook("")
+amazonBookshelf.bookLoan("")
+amazonBookshelf.bookDevolution("")
